@@ -1,5 +1,4 @@
 var express = require('express');
-var router = express.Router();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -51,10 +50,6 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
-});
-
-router.get('/', function(req, res){
-	res.render('index', {tittle: 'Quiz'});
 });
 
 module.exports = app;
