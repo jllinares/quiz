@@ -7,9 +7,12 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz' });
 });
 
-/* Obtener Pregunta */
+router.get('/author', function(req, res) {
+	res.render('author', { title: 'Autor' });
+});
+
+/* Controlador para los componentes de Preguntas y Respuestas */
 router.get('/quizes/question', quizController.question);
-/* Obtener Respuesta */
 router.get('/quizes/answer', quizController.answer);
 
 module.exports = router;
