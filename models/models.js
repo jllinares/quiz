@@ -16,7 +16,7 @@ var Sequelize = require('sequelize');
 
 /* Usar BD SQLite */
 var sequelize = new Sequelize(DB_name, user, pwd, 
-  { dialect:  protocol,
+  { dialect:  dialect,
     protocol: protocol,
     port:     port,
     host:     host,
