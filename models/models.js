@@ -15,7 +15,15 @@ var storage 	= process.env.DATABASE_STORAGE;
 var Sequelize = require('sequelize');
 
 /* Usar BD SQLite */
-var sequelize = new Sequelize(DB_name, user, pwd, {dialect: dialect, protocol: protocol, port: port, host: host, storage: storage, omitNull: true});
+var sequelize = new Sequelize(DB_name, user, pwd, 
+  { dialect:  protocol,
+    protocol: protocol,
+    port:     port,
+    host:     host,
+    storage:  storage,  // solo SQLite (.env)
+    omitNull: true      // solo Postgres
+  }      
+);
 
 /* Importar la definicion de la tabla Quiz en quiz.js */
 var quiz_path = path.join(__dirname, 'quiz');
