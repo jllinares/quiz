@@ -26,7 +26,7 @@ exports.index = function(req, res, next) {
 		search = strUtl(req.query.search).trim().replaceAll(" ", "%").s;
 	}
 	
-	models.Quiz.findAll({where: ["pregunta like ?", "%"+search+"%"]}).then(function(quizes) {
+	models.Quiz.findAll({where: ["lower(pregunta) like lower(?)", "%"+search+"%"]}).then(function(quizes) {
 		res.render('quizes/index.ejs', {quizes: quizes});
 	}).catch(function(error){
 		next(error);
