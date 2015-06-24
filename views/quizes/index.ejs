@@ -1,9 +1,24 @@
-<table>
+<table width="100%">
+<tr><td><b>Lista Disponible</b></td></tr>
 <% 
+if(quizes.length===0) {
+%>
+<tr><td><b>No se encuentraron preguntas por la busqueda deseada</b></td></tr>
+<%
+}
+else {
 for(var i=0; i<quizes.length; i++) {
 %>
 <tr><td><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
 <%
-}
+}}
 %>
 </table>
+<br/>
+<form action="/quizes" name="form" id="form" method="get">
+<table width="100%">
+<tr><td>Realizar una busqueda de pregunta</td></tr>
+<tr><td>Busqueda de pregunta: <input type="text" id="search" name="search" value="" /></td></tr>
+<tr><td><input type="submit" name="enviar" id="enviar" value="buscar" /></td></tr>
+</table>
+</form>

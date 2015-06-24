@@ -1,4 +1,6 @@
 var models = require('../models/models.js');
+var strUtl = require('string');
+var strUtl2 = require('change-case')
 
 /* Autoload */
 exports.load = function(req, res, next, quizId) {
@@ -17,12 +19,18 @@ exports.load = function(req, res, next, quizId) {
 };
 
 /* GET /quizes */
-exports.index = function(req, res) {
-	models.Quiz.findAll().then(function(quizes) {
+exports.index = function(req, res, next) {
+	var search = "";
+	
+	if(req.query.search!=undefined) {
+		search = strUtl(req.query.search).trim().replaceAll(" ", "%").s;
+	}
+	
+	models.Quiz.findAll({where: ["pregunta like ?", "%"+search+"%"]}).then(function(quizes) {
 		res.render('quizes/index.ejs', {quizes: quizes});
 	}).catch(function(error){
 		next(error);
-	});
+	});	
 };
 
 /* GET /quizes/:quizId */
@@ -34,7 +42,7 @@ exports.show = function(req, res) {
 exports.answer = function(req, res) {
 	var rsp = "Incorrecto";
 		
-	if(req.query.respuesta === req.quiz.respuesta) {
+	if(strUtl2.upperCase(strUtl(req.query.respuesta).trim().s) === strUtl2.upperCase(req.quiz.respuesta)) {
 		rsp = "Correcto";
 	}
 		
